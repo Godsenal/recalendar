@@ -1,0 +1,14 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/no-did-update-set-state": false,
+    "react/forbid-prop-types": false,
+    "jsx-a11y/no-noninteractive-element-interactions": false,
+    "jsx-a11y/click-events-have-key-events": false
+  },
+  "env": {
+    "browser": true
+  }
+}
