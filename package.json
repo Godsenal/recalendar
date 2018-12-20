@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "transpile": "babel ./src --out-dir ./dist",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "deploy-storybook": "storybook-to-ghpages"
+    "deploy-storybook": "build-storybook -c .storybook -o docs"
   },
   "author": "godsenal",
   "license": "ISC",
