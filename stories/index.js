@@ -58,34 +58,48 @@ storiesOf('RcPicker', module)
       )}
     </Wrapper>
   ))
-  .add('custom style', () => (
+  .add('customizing', () => (
     <Wrapper>
       {({ selected, onSelectDate }) => (
         <RcPicker
+          dayOfWeek={['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']}
+          dateData={{
+            '2018-12-25': {
+              events: ['🎄 🎅'],
+              styles: {
+                dateBox: {
+                  backgroundColor: 'red',
+                },
+                dateText: {
+                  color: 'white',
+                },
+              },
+            },
+          }}
+          markToday
           selected={selected}
           onSelectDate={onSelectDate}
           styles={{
             container: {
-              backgroundColor: 'pink',
+              width: 300,
+              height: 300,
+              backgroundColor: '#4aa4e4',
               border: '1px solid black',
+            },
+            header: {
+              border: 'none',
+            },
+            table: {
+              border: 'none',
+            },
+            dayContainer: {
+              borderBottom: '1px solid black',
+            },
+            dayText: {
+              color: 'black',
             },
             selectedBox: {
               backgroundColor: 'black',
-            },
-          }}
-        />
-      )}
-    </Wrapper>
-  ))
-  .add('event', () => (
-    <Wrapper>
-      {({ selected, onSelectDate }) => (
-        <RcPicker
-          selected={selected}
-          onSelectDate={onSelectDate}
-          dateData={{
-            '2018-12-25': {
-              events: ['Christmas!'],
             },
           }}
         />

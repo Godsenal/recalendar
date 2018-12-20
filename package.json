@@ -3,10 +3,15 @@
   "version": "1.0.3",
   "description": "simple calendar for react",
   "main": "dist",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Godsenal/recalendar.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "transpile": "babel ./src --out-dir ./dist",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "author": "godsenal",
   "license": "ISC",
@@ -24,6 +29,7 @@
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
     "@storybook/react": "^4.1.2",
+    "@storybook/storybook-deployer": "^2.8.1",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.10.0",
     "eslint-config-airbnb": "^17.1.0",

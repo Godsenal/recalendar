@@ -12,11 +12,11 @@ const baseDayBox = css({
 });
 const DAY_OF_WEEK = ['일', '월', '화', '수', '목', '금', '토'];
 
-const WeekHeader = ({ styles }) => {
+const WeekHeader = ({ dayOfWeek = DAY_OF_WEEK, styles }) => {
   const { dayContainer, dayBox, dayText } = styles;
   return (
     <tr {...css(baseDayContainer, dayContainer)}>
-      {DAY_OF_WEEK.map(day => (
+      {dayOfWeek.map(day => (
         <th {...css(baseDayBox, dayBox)} key={day}>
           <span {...css(dayText)}>{day}</span>
         </th>

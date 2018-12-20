@@ -6,9 +6,14 @@ import { Day } from '../Common';
 const baseRangeDate = css({
   color: 'white',
   backgroundColor: '#f9748a',
+  opacity: 1,
   ':hover': {
     opacity: 0.7,
   },
+});
+const baseInHoverRangeDate = css({
+  backgroundColor: 'rgba(0, 0, 0, 0.1)',
+  opacity: 0.7,
 });
 const withArrowStyle = css({
   '&:after': {
@@ -35,6 +40,7 @@ const leftArrow = css(withArrowStyle, {
 const baseRangeIn = css({
   color: 'white',
   backgroundColor: '#ec84ac',
+  opacity: 1,
   ':hover': {
     opacity: 0.7,
   },
@@ -44,16 +50,26 @@ const RangeDay = ({
   startDate,
   endDate,
   inRangeDates,
+  inHoverRangeDates,
   onDateClick,
+  onEndDateHover,
   styles,
   ...props
 }) => {
   const isStartDate = isSameDay(startDate, day);
   const isEndDate = isSameDay(endDate, day);
   const isInRange = inRangeDates.some(date => isSameDay(day, date));
+  const isInHoverRangeDates = inHoverRangeDates.some(date => isSameDay(day, date));
   const dateClick = () => onDateClick(day);
-  const { rangeInDate, rangeStartDate, rangeEndDate } = styles;
+  const dateHover = () => onEndDateHover(day);
+  const {
+    inHoverRangeDate,
+    rangeInDate,
+    rangeStartDate,
+    rangeEndDate,
+  } = styles;
   const dateStyle = css(
+    isInHoverRangeDates && css(baseInHoverRangeDate, inHoverRangeDate),
     isInRange && css(baseRangeIn, rangeInDate),
     isStartDate && css(baseRangeDate, rightArrow, rangeStartDate),
     isEndDate && css(baseRangeDate, leftArrow, rangeEndDate),
@@ -61,6 +77,7 @@ const RangeDay = ({
   return (
     <Day
       {...props}
+      onDateHover={dateHover}
       onDateClick={dateClick}
       day={day}
       dateStyle={dateStyle}

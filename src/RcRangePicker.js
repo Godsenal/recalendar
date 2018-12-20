@@ -10,6 +10,7 @@ import { RangeDay } from './components/RcRangePicker';
 class RcRangePicker extends Component {
   state = {
     inRangeDates: [],
+    inHoverRangeDates: [],
   };
 
   static propTypes = {
@@ -55,16 +56,32 @@ class RcRangePicker extends Component {
     }
   };
 
+  onEndDateHover = (date) => {
+    const { inHoverRangeDates } = this.state;
+    const { startDate, endDate } = this.props;
+    if (startDate && !endDate && isAfter(date, startDate)) {
+      this.setState({
+        inHoverRangeDates: eachDay(startDate, date),
+      });
+    } else if (inHoverRangeDates.length > 0) {
+      this.setState({
+        inHoverRangeDates: [],
+      });
+    }
+  };
+
   render() {
-    const { inRangeDates } = this.state;
+    const { inRangeDates, inHoverRangeDates } = this.state;
     const { getCalendarMonthDays } = this.props;
     return (
       <Month
         {...this.props}
         Day={RangeDay}
         inRangeDates={inRangeDates}
+        inHoverRangeDates={inHoverRangeDates}
         eachDays={getCalendarMonthDays()}
         onDateClick={this.onSelectDate}
+        onEndDateHover={this.onEndDateHover}
       />
     );
   }

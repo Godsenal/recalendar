@@ -1,4 +1,5 @@
 import Day from './Day';
+import Event from './Event';
 import Month from './Month';
 import MonthHeader from './MonthHeader';
 import Overlay from './Overlay';
@@ -9,6 +10,7 @@ import YearHeader from './YearHeader';
 
 export {
   Day,
+  Event,
   Month,
   MonthHeader,
   Overlay,
@@ -16,4 +18,4 @@ export {
   Week,
   WeekHeader,
   YearHeader,
-}
+};

@@ -5,7 +5,7 @@ import setYear from 'date-fns/set_year';
 import startOfWeek from 'date-fns/start_of_week';
 import endOfWeek from 'date-fns/end_of_week';
 import eachDay from 'date-fns/each_day';
-import getDaysInMonth from 'date-fns/get_days_in_month';
+import lastDayOfMonth from 'date-fns/last_day_of_month';
 import { css } from 'glamor';
 import { YearHeader, MonthHeader } from './components/Common';
 
@@ -34,7 +34,6 @@ const baserc = Wrapped => class extends Component {
       currentDate: this.props.initialDate,
       year: this.props.initialDate.getFullYear(),
       month: this.props.initialDate.getMonth(),
-      lastDayOfMonth: getDaysInMonth(this.props.initialDate),
     };
 
     static propTypes = {
@@ -51,21 +50,17 @@ const baserc = Wrapped => class extends Component {
     updateDate = date => {
       const year = date.getFullYear();
       const month = date.getMonth();
-      const lastDayOfMonth = getDaysInMonth(date);
       this.setState({
         currentDate: date,
         year,
         month,
-        lastDayOfMonth,
       });
     };
 
     getCalendarMonthDays = () => {
       const { year, month } = this.state;
-      const startDate = startOfWeek(new Date(year, month, 0));
-      const endDate = endOfWeek(
-        new Date(year, month, getDaysInMonth(year, month)),
-      );
+      const startDate = startOfWeek(new Date(year, month, 1));
+      const endDate = endOfWeek(lastDayOfMonth(new Date(year, month, 1)));
       return eachDay(startDate, endDate);
     };
 
