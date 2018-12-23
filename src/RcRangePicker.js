@@ -9,8 +9,7 @@ import { RangeDay } from './components/RcRangePicker';
 
 class RcRangePicker extends Component {
   state = {
-    inRangeDates: [],
-    inHoverRangeDates: [],
+    hoverEnd: '',
   };
 
   static propTypes = {
@@ -31,54 +30,51 @@ class RcRangePicker extends Component {
     endDate: '',
   };
 
+  getRangeDate = (startDate, endDate) => (startDate && endDate ? eachDay(startDate, endDate) : []);
+
+  getHoverRange = (startDate, endDate, hoverEnd) => {
+    if (startDate && hoverEnd) {
+      return eachDay(startDate, hoverEnd);
+    }
+    return [];
+  };
+
   onSelectDate = (date) => {
     const { startDate, endDate, onSelectRange } = this.props;
     if (!startDate || isBefore(date, startDate)) {
       onSelectRange(date, endDate);
-      this.setState({
-        inRangeDates: endDate ? eachDay(date, endDate) : [],
-      });
     } else if (!endDate) {
       onSelectRange(startDate, date);
-      this.setState({
-        inRangeDates: eachDay(startDate, date),
-      });
     } else if (endDate && isAfter(date, startDate)) {
       onSelectRange(startDate, date);
-      this.setState({
-        inRangeDates: eachDay(startDate, date),
-      });
     } else {
       onSelectRange('', '');
-      this.setState({
-        inRangeDates: [],
-      });
     }
   };
 
   onEndDateHover = (date) => {
-    const { inHoverRangeDates } = this.state;
+    const { hoverEnd } = this.state;
     const { startDate, endDate } = this.props;
     if (startDate && !endDate && isAfter(date, startDate)) {
       this.setState({
-        inHoverRangeDates: eachDay(startDate, date),
+        hoverEnd: date,
       });
-    } else if (inHoverRangeDates.length > 0) {
+    } else if (hoverEnd) {
       this.setState({
-        inHoverRangeDates: [],
+        hoverEnd: '',
       });
     }
   };
 
   render() {
-    const { inRangeDates, inHoverRangeDates } = this.state;
-    const { getCalendarMonthDays } = this.props;
+    const { hoverEnd } = this.state;
+    const { startDate, endDate, getCalendarMonthDays } = this.props;
     return (
       <Month
         {...this.props}
         Day={RangeDay}
-        inRangeDates={inRangeDates}
-        inHoverRangeDates={inHoverRangeDates}
+        inRangeDates={this.getRangeDate(startDate, endDate)}
+        inHoverRangeDates={this.getHoverRange(startDate, endDate, hoverEnd)}
         eachDays={getCalendarMonthDays()}
         onDateClick={this.onSelectDate}
         onEndDateHover={this.onEndDateHover}

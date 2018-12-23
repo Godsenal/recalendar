@@ -2,13 +2,22 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { format } from 'date-fns';
 import { RcPicker, RcPortal, RcRangePicker } from '../src';
+import './base.css';
 
+const buttonStyle = {
+  fontSize: 16,
+  padding: 10,
+  border: '1px solid #ccc',
+  outline: 'none',
+  marginRight: 10,
+  cursor: 'pointer',
+};
 class Wrapper extends React.Component {
   state = {
     selected: new Date(),
     multiSelected: [],
-    startDate: '',
-    endDate: '',
+    startDate: new Date(),
+    endDate: new Date(new Date().setDate(new Date().getDate() + 7)),
     target: null,
   };
 
@@ -16,7 +25,7 @@ class Wrapper extends React.Component {
 
   onMultiSelectDate = multiSelected => this.setState({ multiSelected });
 
-  onSelectRange = (startDate, endDate) => this.setState({ startDate, endDate });
+  onSelectRange = (startDate, endDate) => this.setState({ startDate, endDate, target: null });
 
   onTargetClick = (e) => {
     const { target } = this.state;
@@ -119,31 +128,67 @@ storiesOf('RcRangePicker', module).add('range picker', () => (
   </Wrapper>
 ));
 
-storiesOf('RcPortal', module).add('with portal', () => (
-  <Wrapper>
-    {({
-      target, selected, onSelectDate, onTargetClick,
-    }) => (
-      <>
-        <button
-          type="button"
-          onClick={onTargetClick}
-          style={{
-            border: 'none',
-            outline: 'none',
-            backgroundColor: 'hotpink',
-            color: 'white',
-            borderRadius: 10,
-            padding: 10,
-            cursor: 'pointer',
-          }}
-        >
-          {selected ? format(selected, 'YYYY-MM-DD') : 'Select date!'}
-        </button>
-        <RcPortal target={target}>
-          <RcPicker selected={selected} onSelectDate={onSelectDate} />
-        </RcPortal>
-      </>
-    )}
-  </Wrapper>
-));
+storiesOf('RcPortal', module)
+  .add('with portal', () => (
+    <Wrapper>
+      {({
+        target, selected, onSelectDate, onTargetClick,
+      }) => (
+        <>
+          <button
+            type="button"
+            onClick={onTargetClick}
+            style={{
+              border: 'none',
+              outline: 'none',
+              backgroundColor: 'hotpink',
+              color: 'white',
+              borderRadius: 10,
+              padding: 10,
+              cursor: 'pointer',
+            }}
+          >
+            {selected ? format(selected, 'YYYY-MM-DD') : 'Select date!'}
+          </button>
+          <RcPortal target={target}>
+            <RcPicker selected={selected} onSelectDate={onSelectDate} />
+          </RcPortal>
+        </>
+      )}
+    </Wrapper>
+  ))
+  .add('range select with portal', () => (
+    <Wrapper>
+      {({
+        target, startDate, endDate, onSelectRange, onTargetClick,
+      }) => (
+        <>
+          <label htmlFor="start">Start</label>
+          <button
+            id="start"
+            type="button"
+            onClick={onTargetClick}
+            style={buttonStyle}
+          >
+            {startDate ? format(startDate, 'YYYY-MM-DD') : 'Start Date'}
+          </button>
+          <label htmlFor="end">End</label>
+          <button
+            id="end"
+            type="button"
+            onClick={onTargetClick}
+            style={buttonStyle}
+          >
+            {endDate ? format(endDate, 'YYYY-MM-DD') : 'End Date'}
+          </button>
+          <RcPortal target={target}>
+            <RcRangePicker
+              startDate={startDate}
+              endDate={endDate}
+              onSelectRange={onSelectRange}
+            />
+          </RcPortal>
+        </>
+      )}
+    </Wrapper>
+  ));
