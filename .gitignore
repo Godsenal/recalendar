@@ -1,6 +1,7 @@
 .npmignore
 
 
+.docz/
 .vscode/
 dist/
 node_modules/
