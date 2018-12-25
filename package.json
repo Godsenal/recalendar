@@ -11,7 +11,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "transpile": "babel ./src --out-dir ./dist",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "deploy-storybook": "build-storybook -c .storybook -o docs"
+    "deploy-storybook": "build-storybook -c .storybook -o docs",
+    "docz:dev": "docz dev"
   },
   "author": "godsenal",
   "license": "ISC",
@@ -28,9 +29,9 @@
     "@babel/plugin-proposal-class-properties": "^7.2.1",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
-    "@storybook/react": "^4.1.2",
-    "@storybook/storybook-deployer": "^2.8.1",
     "babel-eslint": "^10.0.1",
+    "docz": "^0.13.5",
+    "docz-theme-default": "^0.13.5",
     "eslint": "^5.10.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",

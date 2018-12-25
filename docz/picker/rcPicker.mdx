@@ -1,0 +1,96 @@
+---
+name: RcPicker
+menu: Picker
+route: /picker
+---
+
+import { Playground, PropsTable } from 'docz';
+import Wrapper from './Wrapper';
+import RcPicker from '../../src/RcPicker';
+
+# RcPicker
+
+Basic date picker.
+
+## Properties
+
+| Property     | Type                 | required | default |
+| ------------ | -------------------- | -------- | ------- |
+| selected     | Date, Date[], string | true     |         |
+| onSelectDate | function             | true     |         |
+| multiple     | boolean              | false    | false   |
+
+## Basic usage
+
+<Playground>
+  <Wrapper>
+    {({ selected, onSelectDate }) => (
+      <RcPicker selected={selected} onSelectDate={onSelectDate} />
+    )}
+  </Wrapper>
+</Playground>
+
+## Multiple date picker
+
+<Playground>
+  <Wrapper>
+    {({ multiSelected, onMultiSelectDate }) => (
+      <RcPicker
+        multiple
+        selected={multiSelected}
+        onSelectDate={onMultiSelectDate}
+      />
+    )}
+  </Wrapper>
+</Playground>
+
+## Cusotmizing
+
+<Playground>
+  <Wrapper>
+    {({ selected, onSelectDate }) => (
+      <RcPicker
+        dayOfWeek={['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']}
+        dateData={{
+          '2018-12-25': {
+            events: ['🎄 🎅'],
+            styles: {
+              dateBox: {
+                backgroundColor: 'red',
+              },
+              dateText: {
+                color: 'white',
+              },
+            },
+          },
+        }}
+        markToday
+        selected={selected}
+        onSelectDate={onSelectDate}
+        styles={{
+          container: {
+            width: 300,
+            height: 350,
+            backgroundColor: '#4aa4e4',
+            border: '1px solid black',
+          },
+          header: {
+            border: 'none',
+          },
+          table: {
+            border: 'none',
+          },
+          dayContainer: {
+            borderBottom: '1px solid black',
+          },
+          dayText: {
+            color: 'black',
+          },
+          selectedBox: {
+            backgroundColor: 'black',
+          },
+        }}
+      />
+    )}
+  </Wrapper>
+</Playground>

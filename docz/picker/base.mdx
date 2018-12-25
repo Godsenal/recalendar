@@ -1,0 +1,38 @@
+---
+name: Base
+menu: Picker
+route: /base
+---
+
+## Base
+
+Following properties are used for all `Picker` Components.
+
+## Properties
+
+| Property    | Type                    | required | default    |
+| ----------- | ----------------------- | -------- | ---------- |
+| markToday   | boolean                 | false    | false      |
+| dateData    | Object                  | false    | {}         |
+| initialDate | Date object             | false    | new Date() |
+| styles      | React CSS styles object | false    | {}         |
+
+## styles Props
+
+You can customize style with `styles` props. (Thanks to [glamor](https://github.com/threepointone/glamor)!) This props accepts the following keys.
+
+| Key       | Description                           |
+| --------- | ------------------------------------- |
+| container | Applied to Root Container             |
+| header    | Applied to Header                     |
+| table     | Applied to Table                      |
+| yearBox   | Applied to container of Year          |
+| yearText  | Applied to text of Year               |
+| monthBox  | Applied to container of Month         |
+| monthText | Applied to text of Month              |
+| dayBox    | Applied to container of week day      |
+| dayText   | Applied to text of week day           |
+| dateBox   | Applied to container of date          |
+| dateText  | Applied to text of date               |
+| selectBox | Applied to container of selected Date |
+| eventBox  | Applied to container of event         |

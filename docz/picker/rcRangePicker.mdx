@@ -1,0 +1,35 @@
+---
+name: RcRangePicker
+menu: Picker
+route: /range-picker
+---
+
+import { Playground } from 'docz';
+import Wrapper from './Wrapper';
+import RcRangePicker from '../../src/RcRangePicker';
+
+# RcRangePicker
+
+Date range picker.
+
+## Properties
+
+| Property      | Type         | required | default |
+| ------------- | ------------ | -------- | ------- |
+| startDate     | Date, string | true     | ''      |
+| endDate       | Date, string | true     | ''      |
+| onSelectRange | function     | true     |         |
+
+## Basic usage
+
+<Playground>
+  <Wrapper>
+    {({ startDate, endDate, onSelectRange }) => (
+      <RcRangePicker
+        startDate={startDate}
+        endDate={endDate}
+        onSelectRange={onSelectRange}
+      />
+    )}
+  </Wrapper>
+</Playground>

@@ -38,12 +38,14 @@ const baserc = Wrapped => class extends Component {
 
     static propTypes = {
       dateData: PropTypes.object,
+      markToady: PropTypes.bool,
       initialDate: PropTypes.instanceOf(Date),
       styles: PropTypes.object,
     };
 
     static defaultProps = {
       dateData: {},
+      markToady: false,
       initialDate: new Date(),
       styles: {},
     };

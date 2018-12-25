@@ -1,0 +1,70 @@
+---
+name: RcPortal
+menu: helper
+route: /portal
+---
+
+import { Playground, PropsTable } from 'docz';
+import format from 'date-fns/format';
+import Wrapper from '../picker/Wrapper';
+import RcPortal from '../../src/RcPortal';
+import RcRangePicker from '../../src/RcRangePicker';
+
+# RcPortal
+
+Most of time, you want to use picker with popover.
+`RcPortal` simply show calendar with popover. You can use other popover method.
+
+## Properties
+
+| Property | Type      | required | default |
+| -------- | --------- | -------- | ------- |
+| target   | ReactNode | false    | null    |
+
+## Basic usage
+
+<Playground>
+  <div style={{ width: 500, height: 600 }}>
+    <Wrapper>
+      {({ target, startDate, endDate, onSelectRange, onTargetClick }) => {
+        const buttonStyle = {
+          fontSize: 16,
+          padding: 10,
+          border: '1px solid #ccc',
+          outline: 'none',
+          margin: 10,
+          cursor: 'pointer',
+        };
+        return (
+          <>
+            <label htmlFor="start">Start</label>
+            <button
+              id="start"
+              type="button"
+              onClick={onTargetClick}
+              style={buttonStyle}
+            >
+              {startDate ? format(startDate, 'YYYY-MM-DD') : 'Start Date'}
+            </button>
+            <label htmlFor="end">End</label>
+            <button
+              id="end"
+              type="button"
+              onClick={onTargetClick}
+              style={buttonStyle}
+            >
+              {endDate ? format(endDate, 'YYYY-MM-DD') : 'End Date'}
+            </button>
+            <RcPortal target={target}>
+              <RcRangePicker
+                startDate={startDate}
+                endDate={endDate}
+                onSelectRange={onSelectRange}
+              />
+            </RcPortal>
+          </>
+        );
+      }}
+    </Wrapper>
+  </div>
+</Playground>
