@@ -12,7 +12,11 @@
     "transpile": "babel ./src --out-dir ./dist",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "deploy-storybook": "build-storybook -c .storybook -o docs",
-    "docz:dev": "docz dev"
+    "docz:dev": "docz dev",
+    "docz:build": "docz build",
+    "docz:docs": "mv -f ./.docz/dist/* ./docs/",
+    "gh-page:clean": "rm -rf ./docs/*",
+    "gh-page:build": "npm run docz:build && npm run gh-page:clean && npm run docz:docs"
   },
   "author": "godsenal",
   "license": "ISC",
